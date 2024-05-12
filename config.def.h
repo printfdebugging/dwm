@@ -25,6 +25,7 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const unsigned int baralpha = OPAQUE;
 static const unsigned int borderalpha = OPAQUE;
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -51,6 +52,7 @@ static const Rule rules[] = {
     { "thunderbird",                NULL,     NULL,           1 << 8,    0,          0,           0,        -1 },
     { "obsidian",                   NULL,     NULL,           1 << 1,    0,          0,           0,        -1 },
     { "libreofficedev",             NULL,     NULL,           0,         1,          0,           0,        -1 },
+    { "Glade",                      NULL,     NULL,           0,         1,          0,           0,        -1 },
     { "Brave-browser",              NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
 	{ NULL,                         NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
