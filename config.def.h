@@ -66,7 +66,7 @@ static const Rule rules[] = {
     {"Emacs", NULL, NULL, 1 << 1, 0, 0, 0, -1},
     {"Code", NULL, NULL, 1 << 2, 0, 0, 0, -1},
     {"libreofficedev", NULL, NULL, 0, 1, 0, 0, -1},
-    {"Pavucontrol", NULL, NULL, 0, 1, 0, 0, -1},
+    {"pavucontrol", NULL, NULL, 0, 1, 0, 0, -1},
     {"Glade", NULL, NULL, 0, 1, 0, 0, -1},
     {"Brave-browser", NULL, NULL, 1 << 3, 0, 0, 0, -1},
     {NULL, NULL, "Event Tester", 0, 0, 0, 1, -1}, /* xev */
@@ -78,7 +78,7 @@ static const int nmaster = 1;    /* number of clients in master area */
 static const int resizehints =
     1; /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen =
-    1; /* 1 will force focus on the fullscreen window */
+    0; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
@@ -105,7 +105,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", NULL};
-static const char *termcmd[] = {"alacritty", NULL};
+static const char *termcmd[] = {"st", NULL};
 static const char *browsercmd[] = {"brave", NULL};
 
 static const Key keys[] = {
