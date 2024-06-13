@@ -157,6 +157,7 @@ static const Key keys[] = {
     {MODKEY, XK_b, spawn, SHCMD("bookmark-dwm")},
     {MODKEY, XK_g, spawn, SHCMD("getbookmark")},
     {MODKEY, XK_s, spawn, SHCMD("flameshot gui")},
+    {MODKEY, XK_n, spawn, SHCMD("tmux-script")},
 };
 
 /* button definitions */
