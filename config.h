@@ -45,6 +45,14 @@ static const Rule rules[] = {
 	{ "Firefox",        NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "st-256color",    NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ "Brave-browser",  NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
+	{ "Emacs",          NULL,     NULL,           1 << 1,    0,          0,           0,        -1 },
+    { "thunderbird",	NULL,	  NULL,			  1 << 8,	 0,			 0,			  0,	    -1 },			
+
+    { "Code",			NULL,     NULL,			  1 << 2,	0,			 0,			 0,			-1 },			
+    { "libreofficedev",	NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+    { "soffice.bin",	NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+    { "loupe",	        NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+
 	{ NULL,             NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -97,7 +105,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_v,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -136,6 +144,13 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("brave") },
+	{ MODKEY,                       XK_g,      spawn,          SHCMD("getbookmark") },
+	{ MODKEY,                       XK_b,      spawn,          SHCMD("bookmark-dwm") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("flameshot gui") },
+	{ MODKEY,                       XK_e,      spawn,          SHCMD("ema") },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
