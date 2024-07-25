@@ -41,6 +41,16 @@ static const Rule rules[] = {
 	{ "Gimp",               NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox",            NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "st-256color",        NULL,     NULL,           0,         0,          1,           0,        -1 },
+
+	{ "Brave-browser",      NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
+	{ "Emacs",              NULL,     NULL,           1 << 1,    0,          0,           0,        -1 },
+    { "thunderbird",	    NULL,	  NULL,			  1 << 8,	 0,			 0,			  0,	    -1 },
+
+    { "Code",			    NULL,     NULL,			  1 << 2,	0,			 0,			 0,			-1 },			
+    { "libreofficedev",	    NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+    { "soffice.bin",	    NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+    { "loupe",	            NULL,	  NULL,			  0,	    1,			 0,			 0,			-1 },			
+
 	{ NULL,                 NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -56,6 +66,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "[@]",      spiral },
 	{ "[\\]",     dwindle },
@@ -68,7 +79,6 @@ static const Layout layouts[] = {
 	{ ":::",      gaplessgrid },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
 
@@ -93,7 +103,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_v,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -103,13 +113,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
 	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } },
@@ -122,17 +126,22 @@ static const Key keys[] = {
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
+	{ MODKEY,                       XK_g,      spawn,         SHCMD("getbookmark") },
+	{ MODKEY,                       XK_b,      spawn,         SHCMD("bookmark-dwm") },
+	{ MODKEY,                       XK_s,      spawn,         SHCMD("flameshot gui") },
+	{ MODKEY,                       XK_e,      spawn,         SHCMD("ema") },
+	{ MODKEY,                       XK_w,      spawn,         SHCMD("brave") },
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
