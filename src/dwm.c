@@ -465,7 +465,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_comma,  tagmon,         {.i = -1}              },
     {MODKEY | ShiftMask, XK_period, tagmon,         {.i = +1}              },
 
-    {MODKEY,             XK_w,      spawn,          SHCMD("chromium")      },
+    {MODKEY,             XK_w,      spawn,          SHCMD("browser")       },
     {MODKEY,             XK_n,      spawn,          SHCMD("c-n")           },
     {MODKEY,             XK_u,      spawn,          SHCMD("c-u")           },
     {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")   },
