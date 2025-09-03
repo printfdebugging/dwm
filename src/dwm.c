@@ -251,16 +251,6 @@ static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
-static void setgaps(int oh, int ov, int ih, int iv);
-static void incrgaps(const Arg *arg);
-static void incrigaps(const Arg *arg);
-static void incrogaps(const Arg *arg);
-static void incrohgaps(const Arg *arg);
-static void incrovgaps(const Arg *arg);
-static void incrihgaps(const Arg *arg);
-static void incrivgaps(const Arg *arg);
-static void togglegaps(const Arg *arg);
-static void defaultgaps(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -368,7 +358,6 @@ static const char *fonts[]     = {"JetBrainsMono Nerd Font:size=15"};
 static const char col_gray1[]  = "#222222";
 static const char col_gray2[]  = "#444444";
 static const char col_gray3[]  = "#bbbbbb";
-static const char col_gray4[]  = "#eeeeee";
 static const char col_cyan[]   = "#005577";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
@@ -385,24 +374,32 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class            instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-    {"Gimp",           NULL, NULL,           0,      0, 0, 0,  -1},
     {"Chromium",       NULL, NULL,           1 << 3, 0, 0, -1, -1},
     {"chromium",       NULL, NULL,           1 << 3, 0, 0, -1, -1},
+    {"brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, -1},
+    {"Brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, -1},
+
+    {"Thunar",         NULL, NULL,           1 << 1, 0, 0, -1, -1},
+    {"thunar",         NULL, NULL,           1 << 1, 0, 0, -1, -1},
+
     {"Firefox",        NULL, NULL,           1 << 3, 0, 0, -1, -1},
     {"firefox",        NULL, NULL,           1 << 3, 0, 0, -1, -1},
-    {"Element",        NULL, NULL,           1 << 7, 0, 0, -1, -1},
+
     {"thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 1 },
     {"Thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 1 },
 
-    {"gtimelog",       NULL, NULL,           1 << 7, 0, 0, -1, 1 },
-    {"Gtimelog",       NULL, NULL,           1 << 7, 0, 0, -1, 1 },
+    {"virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 1 },
+    {"Virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 1 },
 
     {"Code - OSS",     NULL, NULL,           1 << 2, 0, 0, -1, -1},
-    // { "Emacs",          NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
+    {"code-oss",       NULL, NULL,           1 << 2, 0, 0, -1, -1},
+
     {"st-256color",    NULL, NULL,           0,      0, 1, 0,  -1},
+
     {"libreofficedev", NULL, NULL,           0,      1, 0, 0,  -1},
     {"soffice.bin",    NULL, NULL,           0,      1, 0, 0,  -1},
     {"Glade",          NULL, NULL,           0,      1, 0, 0,  -1},
+
     {"pavucontrol",    NULL, NULL,           0,      1, 0, 0,  -1},
     {"flameshot",      NULL, NULL,           0,      1, 0, 0,  -1},
     {NULL,             NULL, "Event Tester", 0,      0, 0, 1,  -1}, /* xev */
@@ -442,59 +439,40 @@ static const char *termcmd[]  = {"st", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
-    {MODKEY,             XK_d,      spawn,          {.v = dmenucmd}        },
-    {MODKEY,             XK_Return, spawn,          {.v = termcmd}         },
-    {MODKEY,             XK_v,      togglebar,      {0}                    },
-    {MODKEY,             XK_j,      focusstack,     {.i = +1}              },
-    {MODKEY,             XK_k,      focusstack,     {.i = -1}              },
-    {MODKEY,             XK_i,      incnmaster,     {.i = +1}              },
-    {MODKEY,             XK_o,      incnmaster,     {.i = -1}              },
-    {MODKEY,             XK_h,      setmfact,       {.f = -0.05}           },
-    {MODKEY,             XK_l,      setmfact,       {.f = +0.05}           },
-    {MODKEY,             XK_Tab,    view,           {0}                    },
-    {MODKEY,             XK_q,      killclient,     {0}                    },
-    {MODKEY,             XK_t,      setlayout,      {.v = &layouts[0]}     },
-    {MODKEY,             XK_m,      setlayout,      {.v = &layouts[1]}     },
-    {MODKEY,             XK_space,  zoom,           {0}                    },
-    {MODKEY | ShiftMask, XK_space,  togglefloating, {0}                    },
-    {MODKEY,             XK_f,      togglefullscr,  {0}                    },
-    {MODKEY,             XK_0,      view,           {.ui = ~0}             },
-    {MODKEY | ShiftMask, XK_0,      tag,            {.ui = ~0}             },
-    {MODKEY,             XK_comma,  focusmon,       {.i = -1}              },
-    {MODKEY,             XK_period, focusmon,       {.i = +1}              },
-    {MODKEY | ShiftMask, XK_comma,  tagmon,         {.i = -1}              },
-    {MODKEY | ShiftMask, XK_period, tagmon,         {.i = +1}              },
+    {MODKEY,             XK_d,      spawn,          {.v = dmenucmd}       },
+    {MODKEY,             XK_Return, spawn,          {.v = termcmd}        },
+    {MODKEY,             XK_v,      togglebar,      {0}                   },
+    {MODKEY,             XK_j,      focusstack,     {.i = +1}             },
+    {MODKEY,             XK_k,      focusstack,     {.i = -1}             },
+    {MODKEY,             XK_i,      incnmaster,     {.i = +1}             },
+    {MODKEY,             XK_o,      incnmaster,     {.i = -1}             },
+    {MODKEY,             XK_h,      setmfact,       {.f = -0.05}          },
+    {MODKEY,             XK_l,      setmfact,       {.f = +0.05}          },
+    {MODKEY,             XK_Tab,    view,           {0}                   },
+    {MODKEY,             XK_q,      killclient,     {0}                   },
+    {MODKEY,             XK_t,      setlayout,      {.v = &layouts[0]}    },
+    {MODKEY,             XK_m,      setlayout,      {.v = &layouts[1]}    },
+    {MODKEY,             XK_space,  zoom,           {0}                   },
+    {MODKEY | ShiftMask, XK_space,  togglefloating, {0}                   },
+    {MODKEY,             XK_f,      togglefullscr,  {0}                   },
+    {MODKEY,             XK_0,      view,           {.ui = ~0}            },
+    {MODKEY | ShiftMask, XK_0,      tag,            {.ui = ~0}            },
+    {MODKEY,             XK_comma,  focusmon,       {.i = -1}             },
+    {MODKEY,             XK_period, focusmon,       {.i = +1}             },
+    {MODKEY | ShiftMask, XK_comma,  tagmon,         {.i = -1}             },
+    {MODKEY | ShiftMask, XK_period, tagmon,         {.i = +1}             },
 
-    {MODKEY,             XK_w,      spawn,          SHCMD("browser")       },
-    {MODKEY,             XK_n,      spawn,          SHCMD("c-n")           },
-    {MODKEY,             XK_u,      spawn,          SHCMD("c-u")           },
-    {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")   },
-    {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm")  },
-    {MODKEY,             XK_c,      spawn,          SHCMD("quickemu-vms")  },
-    {MODKEY,             XK_s,      spawn,          SHCMD("flameshot gui") },
-    {MODKEY,             XK_p,      spawn,          SHCMD("dotfiles-save") },
-    {MODKEY,             XK_e,      spawn,          SHCMD("offline-videos")},
-    {MODKEY,             XK_slash,  spawn,          SHCMD("lock")          },
-
-    // { MODKEY|Mod1Mask,              XK_h,      incrgaps,       {.i = +1 } },
-    // { MODKEY|Mod1Mask,              XK_l,      incrgaps,       {.i = -1 } },
-    // { MODKEY|Mod1Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
-    // { MODKEY|Mod1Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
-    // { MODKEY|Mod1Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
-    // { MODKEY|Mod1Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-    // { MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
-    // { MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-    // { MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-    // { MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-    // { MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-    // { MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-    // { MODKEY|Mod1Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-    // { MODKEY|Mod1Mask,              XK_o,      incrohgaps,     {.i = -1 } },
-    // { MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
-    // { MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+    {MODKEY,             XK_w,      spawn,          SHCMD("browser")      },
+    {MODKEY,             XK_e,      spawn,          SHCMD("thunar")       },
+    {MODKEY,             XK_n,      spawn,          SHCMD("c-n")          },
+    {MODKEY,             XK_u,      spawn,          SHCMD("c-u")          },
+    {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")  },
+    {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm") },
+    {MODKEY,             XK_s,      spawn,          SHCMD("flameshot gui")},
+    {MODKEY,             XK_slash,  spawn,          SHCMD("lock")         },
 
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
-        TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q,      quit,           {0}                    },
+        TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q,      quit,           {0}                   },
 };
 
 /* button definitions */
@@ -1834,60 +1812,6 @@ void setfullscreen(Client *c, int fullscreen) {
         resizeclient(c, c->x, c->y, c->w, c->h);
         arrange(c->mon);
     }
-}
-
-void setgaps(int oh, int ov, int ih, int iv) {
-    if (oh < 0)
-        oh = 0;
-    if (ov < 0)
-        ov = 0;
-    if (ih < 0)
-        ih = 0;
-    if (iv < 0)
-        iv = 0;
-
-    selmon->gappoh = oh;
-    selmon->gappov = ov;
-    selmon->gappih = ih;
-    selmon->gappiv = iv;
-    arrange(selmon);
-}
-
-void togglegaps(const Arg *arg) {
-    enablegaps = !enablegaps;
-    arrange(selmon);
-}
-
-void defaultgaps(const Arg *arg) {
-    setgaps(gappoh, gappov, gappih, gappiv);
-}
-
-void incrgaps(const Arg *arg) {
-    setgaps(selmon->gappoh + arg->i, selmon->gappov + arg->i, selmon->gappih + arg->i, selmon->gappiv + arg->i);
-}
-
-void incrigaps(const Arg *arg) {
-    setgaps(selmon->gappoh, selmon->gappov, selmon->gappih + arg->i, selmon->gappiv + arg->i);
-}
-
-void incrogaps(const Arg *arg) {
-    setgaps(selmon->gappoh + arg->i, selmon->gappov + arg->i, selmon->gappih, selmon->gappiv);
-}
-
-void incrohgaps(const Arg *arg) {
-    setgaps(selmon->gappoh + arg->i, selmon->gappov, selmon->gappih, selmon->gappiv);
-}
-
-void incrovgaps(const Arg *arg) {
-    setgaps(selmon->gappoh, selmon->gappov + arg->i, selmon->gappih, selmon->gappiv);
-}
-
-void incrihgaps(const Arg *arg) {
-    setgaps(selmon->gappoh, selmon->gappov, selmon->gappih + arg->i, selmon->gappiv);
-}
-
-void incrivgaps(const Arg *arg) {
-    setgaps(selmon->gappoh, selmon->gappov, selmon->gappih, selmon->gappiv + arg->i);
 }
 
 void setlayout(const Arg *arg) {
