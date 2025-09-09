@@ -402,6 +402,7 @@ static const Rule rules[] = {
 
     {"pavucontrol",    NULL, NULL,           0,      1, 0, 0,  -1},
     {"flameshot",      NULL, NULL,           0,      1, 0, 0,  -1},
+    {NULL,             NULL, "OpenGL",       0,      1, 0, 0,  -1},
     {NULL,             NULL, "Event Tester", 0,      0, 0, 1,  -1}, /* xev */
 };
 
