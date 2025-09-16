@@ -374,27 +374,31 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class            instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-    {"Chromium",       NULL, NULL,           1 << 3, 0, 0, -1, -1},
-    {"chromium",       NULL, NULL,           1 << 3, 0, 0, -1, -1},
-    {"brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, -1},
-    {"Brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, -1},
 
-    {"Thunar",         NULL, NULL,           1 << 1, 0, 0, -1, -1},
-    {"thunar",         NULL, NULL,           1 << 1, 0, 0, -1, -1},
+    {"Thunar",         NULL, NULL,           1 << 1, 0, 0, -1, 0 },
+    {"thunar",         NULL, NULL,           1 << 1, 0, 0, -1, 0 },
+    {"okular",         NULL, NULL,           1 << 2, 0, 0, -1, 0 },
+    {"Okular",         NULL, NULL,           1 << 2, 0, 0, -1, 0 },
 
-    {"Firefox",        NULL, NULL,           1 << 3, 0, 0, -1, -1},
-    {"firefox",        NULL, NULL,           1 << 3, 0, 0, -1, -1},
+    {"Chromium",       NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"chromium",       NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"Brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"Firefox",        NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"firefox",        NULL, NULL,           1 << 3, 0, 0, -1, 0 },
 
-    {"thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 1 },
-    {"Thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 1 },
+    {"Vinagre",        NULL, NULL,           1 << 6, 0, 0, -1, 0 },
+    {"vinagre",        NULL, NULL,           1 << 6, 0, 0, -1, 0 },
+    {"virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 0 },
+    {"Virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 0 },
+    {"thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 0 },
+    {"Thunderbird",    NULL, NULL,           1 << 8, 0, 0, -1, 0 },
 
-    {"virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 1 },
-    {"Virt-manager",   NULL, NULL,           1 << 7, 0, 0, -1, 1 },
+    {NULL,             NULL, "OpenGL",       0,      1, 0, 0,  0 },
 
-    {"Code - OSS",     NULL, NULL,           1 << 2, 0, 0, -1, -1},
-    {"code-oss",       NULL, NULL,           1 << 2, 0, 0, -1, -1},
-
-    {"st-256color",    NULL, NULL,           0,      0, 1, 0,  -1},
+    {"st-256color",    NULL, NULL,           1,      0, 1, 0,  1 },
+    {"Code - OSS",     NULL, NULL,           1 << 2, 0, 0, -1, 1 },
+    {"code-oss",       NULL, NULL,           1 << 2, 0, 0, -1, 1 },
 
     {"libreofficedev", NULL, NULL,           0,      1, 0, 0,  -1},
     {"soffice.bin",    NULL, NULL,           0,      1, 0, 0,  -1},
@@ -402,7 +406,6 @@ static const Rule rules[] = {
 
     {"pavucontrol",    NULL, NULL,           0,      1, 0, 0,  -1},
     {"flameshot",      NULL, NULL,           0,      1, 0, 0,  -1},
-    {NULL,             NULL, "OpenGL",       0,      1, 0, 0,  -1},
     {NULL,             NULL, "Event Tester", 0,      0, 0, 1,  -1}, /* xev */
 };
 
