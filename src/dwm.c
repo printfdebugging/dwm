@@ -473,6 +473,8 @@ static const Key keys[] = {
     {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")  },
     {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm") },
     {MODKEY,             XK_s,      spawn,          SHCMD("flameshot gui")},
+    {MODKEY,             XK_p,      spawn,          SHCMD("cred --type")  },
+    {MODKEY | ShiftMask, XK_p,      spawn,          SHCMD("2fa")          },
     {MODKEY,             XK_slash,  spawn,          SHCMD("lock")         },
 
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
