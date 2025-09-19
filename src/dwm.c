@@ -468,7 +468,6 @@ static const Key keys[] = {
 
     {MODKEY,             XK_w,      spawn,          SHCMD("browser")      },
     {MODKEY,             XK_e,      spawn,          SHCMD("thunar")       },
-    {MODKEY,             XK_n,      spawn,          SHCMD("c-n")          },
     {MODKEY,             XK_u,      spawn,          SHCMD("c-u")          },
     {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")  },
     {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm") },
