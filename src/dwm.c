@@ -396,7 +396,7 @@ static const Rule rules[] = {
 
     {NULL,             NULL, "OpenGL",       0,      1, 0, 0,  0 },
 
-    {"st-256color",    NULL, NULL,           1,      0, 1, 0,  1 },
+    {"st-256color",    NULL, NULL,           0,      0, 1, 0,  1 },
     {"Code - OSS",     NULL, NULL,           1 << 2, 0, 0, -1, 1 },
     {"code-oss",       NULL, NULL,           1 << 2, 0, 0, -1, 1 },
 
