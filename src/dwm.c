@@ -386,6 +386,8 @@ static const Rule rules[] = {
     {"Brave-browser",  NULL, NULL,           1 << 3, 0, 0, -1, 0 },
     {"Firefox",        NULL, NULL,           1 << 3, 0, 0, -1, 0 },
     {"firefox",        NULL, NULL,           1 << 3, 0, 0, -1, 0 },
+    {"Devtools",       NULL, NULL,           1 << 3, 0, 0, -1, 1 },
+    {"devtools",       NULL, NULL,           1 << 3, 0, 0, -1, 1 },
 
     {"Vinagre",        NULL, NULL,           1 << 6, 0, 0, -1, 0 },
     {"vinagre",        NULL, NULL,           1 << 6, 0, 0, -1, 0 },
