@@ -399,8 +399,8 @@ static const Rule rules[] = {
     {NULL,             NULL, "OpenGL",       0,      1, 0, 0,  -1},
 
     {"st-256color",    NULL, NULL,           0,      0, 1, 0,  1 },
-    {"Code - OSS",     NULL, NULL,           1 << 2, 0, 0, -1, 1 },
-    {"code-oss",       NULL, NULL,           1 << 2, 0, 0, -1, 1 },
+    {"Code",           NULL, NULL,           1 << 2, 0, 0, -1, 1 },
+    {"code",           NULL, NULL,           1 << 2, 0, 0, -1, 1 },
 
     {"libreofficedev", NULL, NULL,           0,      1, 0, 0,  -1},
     {"soffice.bin",    NULL, NULL,           0,      1, 0, 0,  -1},
